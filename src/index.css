@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #0A0B0E;
+    color: #E2E4E9;
+  }
+
+  h1, h2, h3, .font-serif-luxury {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+
+  .font-brand {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  }
+}
+
+/* High Density Luxury Champagne Gold Accents */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #DFCA9B 0%, #C5A368 50%, #9E7D44 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-gradient-border {
+  border-color: #C5A368;
+}
+
+.subtle-mesh-bg {
+  background-image: radial-gradient(at 10% 20%, rgba(197, 163, 104, 0.04) 0px, transparent 50%),
+                    radial-gradient(at 90% 80%, rgba(20, 22, 28, 0.9) 0px, transparent 50%);
+}
+
+/* High Density scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0B0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #23262D;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3A3F4D;
+}
+
+

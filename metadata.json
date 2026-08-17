@@ -1,0 +1,6 @@
+{
+  "name": "FourFold Worldwide - VIP Cruise & London Transfers",
+  "description": "Premium VIP private chauffeur transfer service specializing in London to Southampton Cruise Port transfers, Mercedes V-Class, and executive SUVs.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
