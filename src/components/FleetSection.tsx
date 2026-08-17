@@ -5,22 +5,10 @@ import { VehicleType } from '../types';
 
 interface FleetSectionProps {
   onSelectVehicle: (vehicleId: VehicleType) => void;
-  currency: 'GBP' | 'USD' | 'EUR';
 }
 
-export const FleetSection: React.FC<FleetSectionProps> = ({ onSelectVehicle, currency }) => {
+export const FleetSection: React.FC<FleetSectionProps> = ({ onSelectVehicle }) => {
   const [activeVehicleId, setActiveVehicleId] = useState<VehicleType>('v-class');
-
-  const { symbol, multiplier } = React.useMemo(() => {
-    switch (currency) {
-      case 'USD':
-        return { symbol: '$', multiplier: 1.3 };
-      case 'EUR':
-        return { symbol: '€', multiplier: 1.18 };
-      default:
-        return { symbol: '£', multiplier: 1.0 };
-    }
-  }, [currency]);
 
   return (
     <section id="fleet" className="py-24 bg-[#0A0B0E] relative border-b border-[#23262D]">
@@ -66,8 +54,8 @@ export const FleetSection: React.FC<FleetSectionProps> = ({ onSelectVehicle, cur
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {VEHICLES.map((vehicle) => {
             const isFeatured = vehicle.id === 'v-class';
-            const heathrowFare = Math.round(vehicle.baseFareSouthamptonFromHeathrow * multiplier);
-            const londonFare = Math.round(vehicle.baseFareSouthamptonFromLondon * multiplier);
+            const heathrowFare = vehicle.baseFareSouthamptonFromHeathrow;
+            const londonFare = vehicle.baseFareSouthamptonFromLondon;
 
             return (
               <div
@@ -144,11 +132,11 @@ export const FleetSection: React.FC<FleetSectionProps> = ({ onSelectVehicle, cur
                   <div className="pt-3.5 border-t border-[#23262D]">
                     <div className="flex justify-between items-baseline mb-1">
                       <span className="text-xs text-[#8A8F98]">Heathrow ⇄ Southampton</span>
-                      <span className="text-sm font-bold text-[#C5A368]">{symbol}{heathrowFare}</span>
+                      <span className="text-sm font-bold text-[#C5A368]">£{heathrowFare}</span>
                     </div>
                     <div className="flex justify-between items-baseline">
                       <span className="text-xs text-[#8A8F98]">Central London ⇄ Southampton</span>
-                      <span className="text-sm font-bold text-white">{symbol}{londonFare}</span>
+                      <span className="text-sm font-bold text-white">£{londonFare}</span>
                     </div>
                     <p className="text-[10px] text-[#8A8F98] mt-1.5">
                       *All-inclusive: Includes Meet &amp; Greet, tolls, parking, and 60-min airport wait time.

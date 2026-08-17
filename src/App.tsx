@@ -15,7 +15,6 @@ import { MessageCircle, Phone } from 'lucide-react';
 import { COMPANY_INFO } from './data/mockData';
 
 export default function App() {
-  const [currency, setCurrency] = useState<'GBP' | 'USD' | 'EUR'>('GBP');
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('v-class');
 
   const scrollToCalculator = () => {
@@ -54,8 +53,6 @@ export default function App() {
       {/* Navigation */}
       <Navbar
         onBookNowClick={scrollToCalculator}
-        currency={currency}
-        setCurrency={setCurrency}
       />
 
       {/* Main Content Sections */}
@@ -63,17 +60,14 @@ export default function App() {
         <Hero
           onExploreFleet={scrollToFleet}
           onBookNow={scrollToCalculator}
-          currency={currency}
         />
 
         <BookingCalculator
-          currency={currency}
           selectedVehicleId={selectedVehicle}
         />
 
         <FleetSection
           onSelectVehicle={handleSelectVehicleFromFleet}
-          currency={currency}
         />
 
         <CruiseTerminalsGuide
@@ -82,7 +76,6 @@ export default function App() {
 
         <SightseeingAddons
           onSelectLayover={handleSelectLayover}
-          currency={currency}
         />
 
         <VIPPerks />

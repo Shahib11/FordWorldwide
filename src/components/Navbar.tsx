@@ -4,11 +4,9 @@ import { COMPANY_INFO } from '../data/mockData';
 
 interface NavbarProps {
   onBookNowClick: () => void;
-  currency: 'GBP' | 'USD' | 'EUR';
-  setCurrency: (c: 'GBP' | 'USD' | 'EUR') => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onBookNowClick, currency, setCurrency }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onBookNowClick }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -46,25 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookNowClick, currency, setCur
             Specialists in Southampton Cruise Port Transfers
           </span>
         </div>
-        <div className="flex items-center space-x-4">
-          {/* Currency Switcher */}
-          <div className="flex items-center bg-[#14161C] rounded-full p-0.5 border border-[#23262D]">
-            {(['GBP', 'USD', 'EUR'] as const).map((curr) => (
-              <button
-                key={curr}
-                type="button"
-                onClick={() => setCurrency(curr)}
-                className={`px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wider transition-all ${
-                  currency === curr
-                    ? 'bg-[#C5A368] text-black shadow-sm font-bold'
-                    : 'text-[#8A8F98] hover:text-[#E2E4E9]'
-                }`}
-              >
-                {curr === 'GBP' ? '£ GBP' : curr === 'USD' ? '$ USD' : '€ EUR'}
-              </button>
-            ))}
-          </div>
-
+        <div className="flex items-center space-x-5">
           <a
             href={`tel:${COMPANY_INFO.phone.replace(/\s+/g, '')}`}
             className="flex items-center hover:text-[#C5A368] text-[#E2E4E9] transition-colors"
@@ -168,24 +148,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onBookNowClick, currency, setCur
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
         <div className="lg:hidden bg-[#0A0B0E] border-b border-[#23262D] px-5 pt-4 pb-6 mt-3 shadow-2xl space-y-4 animate-in slide-in-from-top-4 duration-200">
-          <div className="flex items-center justify-between pb-3 border-b border-[#23262D]">
-            <span className="text-[10px] text-[#8A8F98] uppercase tracking-wider font-bold">Select Currency</span>
-            <div className="flex items-center bg-[#14161C] rounded-full p-1 border border-[#23262D]">
-              {(['GBP', 'USD', 'EUR'] as const).map((curr) => (
-                <button
-                  key={curr}
-                  type="button"
-                  onClick={() => setCurrency(curr)}
-                  className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                    currency === curr ? 'bg-[#C5A368] text-black font-bold' : 'text-[#8A8F98]'
-                  }`}
-                >
-                  {curr}
-                </button>
-              ))}
-            </div>
-          </div>
-
           <div className="flex flex-col space-y-3 text-xs font-semibold uppercase tracking-wider text-[#8A8F98]">
             <a
               href="#booking-calculator"

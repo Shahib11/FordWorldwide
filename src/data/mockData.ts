@@ -284,9 +284,9 @@ export const FAQS = [
       "Yes, we provide complimentary, professionally sanitized infant capsules, toddler forward-facing seats, and high-back booster seats upon request. Simply select the count in our booking form.",
   },
   {
-    question: "Is this booking form compatible with Netlify?",
+    question: "How do I receive booking confirmation and chauffeur details?",
     answer:
-      "Yes, our booking and contact engine is 100% Netlify Forms compliant with standard HTML static markup, honeypot spam protection, and instant direct dispatch options via WhatsApp and Email confirmation.",
+      "Upon submitting your reservation, you receive an instant reference number. Our 24/7 operations team will review your itinerary and dispatch full chauffeur contact details, vehicle registration, and terminal meeting instructions directly to your email and WhatsApp.",
   },
 ];
 

@@ -4,22 +4,10 @@ import { SIGHTSEEING_STOPS } from '../data/mockData';
 
 interface SightseeingAddonsProps {
   onSelectLayover: (layoverId: string) => void;
-  currency: 'GBP' | 'USD' | 'EUR';
 }
 
-export const SightseeingAddons: React.FC<SightseeingAddonsProps> = ({ onSelectLayover, currency }) => {
+export const SightseeingAddons: React.FC<SightseeingAddonsProps> = ({ onSelectLayover }) => {
   const stops = SIGHTSEEING_STOPS.filter(s => s.id !== 'none');
-
-  const { symbol, multiplier } = React.useMemo(() => {
-    switch (currency) {
-      case 'USD':
-        return { symbol: '$', multiplier: 1.3 };
-      case 'EUR':
-        return { symbol: '€', multiplier: 1.18 };
-      default:
-        return { symbol: '£', multiplier: 1.0 };
-    }
-  }, [currency]);
 
   return (
     <section id="sightseeing" className="py-24 bg-[#0A0B0E] relative border-b border-[#23262D]">
@@ -41,7 +29,6 @@ export const SightseeingAddons: React.FC<SightseeingAddonsProps> = ({ onSelectLa
         {/* Sightseeing Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {stops.map((stop) => {
-            const price = Math.round(stop.extraPrice * multiplier);
             return (
               <div
                 key={stop.id}
@@ -53,7 +40,7 @@ export const SightseeingAddons: React.FC<SightseeingAddonsProps> = ({ onSelectLa
                       <Landmark className="w-4 h-4" />
                     </div>
                     <span className="font-mono text-xs font-bold text-[#C5A368]">
-                      +{symbol}{price}
+                      +£{stop.extraPrice}
                     </span>
                   </div>
 

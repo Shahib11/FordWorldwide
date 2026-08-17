@@ -144,11 +144,11 @@ export const ContactSection: React.FC = () => {
               </div>
             </div>
 
-            {/* Netlify Certified Notice */}
+            {/* Security Notice */}
             <div className="p-3.5 rounded-xl bg-[#14161C] border border-[#23262D] text-xs text-[#8A8F98] flex items-center space-x-3">
               <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
               <span>
-                <strong className="text-[#E2E4E9]">Netlify Forms Ready:</strong> All booking and contact requests are processed with SSL encryption and instant notification dispatch.
+                <strong className="text-[#E2E4E9]">Instant Dispatch:</strong> All booking and contact requests are processed with 256-bit SSL encryption and instant notification to our on-duty operations team.
               </span>
             </div>
           </div>
@@ -261,7 +261,7 @@ export const ContactSection: React.FC = () => {
                   className="w-full py-3.5 rounded-xl bg-[#C5A368] hover:bg-[#b59458] text-black font-bold uppercase tracking-wider text-xs shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer disabled:opacity-60"
                 >
                   <Send className="w-3.5 h-3.5" />
-                  <span>{isSubmitting ? 'Sending Request...' : 'Send Netlify Inquiry'}</span>
+                  <span>{isSubmitting ? 'Sending Request...' : 'Send Transfer Inquiry'}</span>
                 </button>
               </form>
             )}

@@ -41,7 +41,7 @@ export const Footer: React.FC = () => {
                 Licensed &amp; Insured
               </span>
               <span>•</span>
-              <span className="text-[10px] uppercase font-bold text-[#8A8F98]">Netlify Forms Certified</span>
+              <span className="text-[10px] uppercase font-bold text-[#8A8F98]">256-Bit SSL Encrypted</span>
             </div>
           </div>
 
@@ -125,7 +125,7 @@ export const Footer: React.FC = () => {
           <p>© {new Date().getFullYear()} FourFold Worldwide. All rights reserved. Registered in England &amp; Wales.</p>
 
           <div className="flex items-center space-x-4">
-            <span>Netlify Forms Compatible</span>
+            <span>Fixed Fare Guarantee</span>
             <span>GDPR Compliant</span>
             <button
               type="button"

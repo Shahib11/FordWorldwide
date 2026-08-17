@@ -5,35 +5,9 @@ import { VEHICLES } from '../data/mockData';
 interface HeroProps {
   onExploreFleet: () => void;
   onBookNow: () => void;
-  currency: 'GBP' | 'USD' | 'EUR';
 }
 
-export const Hero: React.FC<HeroProps> = ({ onExploreFleet, onBookNow, currency }) => {
-  const getCurrencySymbol = (curr: 'GBP' | 'USD' | 'EUR') => {
-    switch (curr) {
-      case 'USD':
-        return '$';
-      case 'EUR':
-        return '€';
-      default:
-        return '£';
-    }
-  };
-
-  const getMultiplier = (curr: 'GBP' | 'USD' | 'EUR') => {
-    switch (curr) {
-      case 'USD':
-        return 1.3;
-      case 'EUR':
-        return 1.18;
-      default:
-        return 1;
-    }
-  };
-
-  const sym = getCurrencySymbol(currency);
-  const mul = getMultiplier(currency);
-
+export const Hero: React.FC<HeroProps> = ({ onExploreFleet, onBookNow }) => {
   return (
     <section className="relative min-h-[85vh] pt-28 pb-16 flex items-center justify-center overflow-hidden bg-[#0A0B0E] border-b border-[#23262D]">
       {/* High Density Subtle Mesh Backdrop */}
@@ -130,8 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreFleet, onBookNow, currency 
                 <div className="text-right">
                   <span className="text-[10px] uppercase tracking-wider text-[#8A8F98]">From LHR Port</span>
                   <p className="text-lg font-bold text-[#C5A368]">
-                    {sym}
-                    {Math.round(250 * mul)}
+                    £250
                   </p>
                 </div>
               </div>
@@ -167,8 +140,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreFleet, onBookNow, currency 
 
                       <div className="text-right pl-2">
                         <div className="text-xs font-bold text-[#C5A368]">
-                          {sym}
-                          {Math.round(vehicle.baseFareSouthamptonFromHeathrow * mul)}
+                          £{vehicle.baseFareSouthamptonFromHeathrow}
                         </div>
                         <span className="text-[9px] uppercase tracking-wider text-[#8A8F98] block">Select</span>
                       </div>

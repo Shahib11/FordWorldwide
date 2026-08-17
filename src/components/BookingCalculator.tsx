@@ -22,12 +22,10 @@ import { VEHICLES, CRUISE_TERMINALS, SIGHTSEEING_STOPS, COMPANY_INFO } from '../
 import { VehicleType, BookingFormData } from '../types';
 
 interface BookingCalculatorProps {
-  currency: 'GBP' | 'USD' | 'EUR';
   selectedVehicleId?: VehicleType;
 }
 
 export const BookingCalculator: React.FC<BookingCalculatorProps> = ({ 
-  currency, 
   selectedVehicleId = 'v-class' 
 }) => {
   // Form State
@@ -82,18 +80,6 @@ export const BookingCalculator: React.FC<BookingCalculatorProps> = ({
     return SIGHTSEEING_STOPS.find(s => s.id === formData.sightseeingStopId) || SIGHTSEEING_STOPS[0];
   }, [formData.sightseeingStopId]);
 
-  // Currency multiplier
-  const { symbol, multiplier } = useMemo(() => {
-    switch (currency) {
-      case 'USD':
-        return { symbol: '$', multiplier: 1.3 };
-      case 'EUR':
-        return { symbol: '€', multiplier: 1.18 };
-      default:
-        return { symbol: '£', multiplier: 1.0 };
-    }
-  }, [currency]);
-
   // Live Price Calculation
   const priceCalculation = useMemo(() => {
     const isHeathrow = formData.serviceType.includes('heathrow');
@@ -116,11 +102,10 @@ export const BookingCalculator: React.FC<BookingCalculatorProps> = ({
       sightseeingGBP: stopCost,
       returnLegGBP: returnLegCost,
       totalGBP,
-      totalConverted: Math.round(totalGBP * multiplier),
       approxDurationMinutes: isHeathrow ? 75 : 105,
       approxMiles: isHeathrow ? 65 : 78,
     };
-  }, [formData.serviceType, currentVehicle, currentStop, formData.returnTrip, multiplier]);
+  }, [formData.serviceType, currentVehicle, currentStop, formData.returnTrip]);
 
   // Check if luggage exceeds selected vehicle capacity
   const luggageWarning = useMemo(() => {
@@ -164,7 +149,7 @@ export const BookingCalculator: React.FC<BookingCalculatorProps> = ({
       tourAddon: currentStop.name,
       childSeats: `Infant: ${formData.childSeats.infant}, Toddler: ${formData.childSeats.toddler}, Booster: ${formData.childSeats.booster}`,
       specialRequests: formData.specialRequests,
-      estimatedFare: `£${priceCalculation.totalGBP} (${symbol}${priceCalculation.totalConverted})`,
+      estimatedFare: `£${priceCalculation.totalGBP}`,
       bookingReference: generatedRef,
     };
 
@@ -200,7 +185,7 @@ Vehicle: ${currentVehicle.name}
 Ship/Flight: ${formData.cruiseShipName || formData.flightNumber || 'Pending'}
 Luggage: ${formData.largeSuitcases} Large Bags, ${formData.cabinBags} Cabin Bags
 Sightseeing: ${currentStop.name}
-Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.totalConverted})`;
+Estimated Total: £${priceCalculation.totalGBP}`;
 
   const whatsappDirectLink = `https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}?text=${encodeURIComponent(
     formattedWhatsAppText
@@ -219,7 +204,7 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-[#14161C] border border-[#23262D] text-[#C5A368] text-[10px] font-bold uppercase tracking-wider">
             <Sparkles className="w-3.5 h-3.5" />
-            <span>Instant Transparent Pricing & Netlify Booking</span>
+            <span>Instant Transparent Pricing &amp; VIP Booking</span>
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#E2E4E9] tracking-tight">
             Configure Your <span className="font-serif italic text-[#C5A368]">VIP Cruise Transfer</span>
@@ -241,7 +226,7 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
                 VIP Transfer Request Received
               </h3>
               <p className="text-[#8A8F98] text-sm max-w-lg mx-auto">
-                Thank you, <strong className="text-white">{formData.fullName || 'Valued Guest'}</strong>. Your Southampton cruise transfer request has been logged via our Netlify reservation dispatch.
+                Thank you, <strong className="text-white">{formData.fullName || 'Valued Guest'}</strong>. Your Southampton cruise transfer request has been logged with our 24/7 chauffeur operations team.
               </p>
             </div>
 
@@ -273,7 +258,7 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
               </div>
               <div>
                 <span className="text-[#8A8F98] block text-[10px] uppercase font-bold">Estimated Fixed Fare:</span>
-                <span className="font-bold text-[#C5A368] text-sm">{symbol}{priceCalculation.totalConverted} (All-Inclusive)</span>
+                <span className="font-bold text-[#C5A368] text-sm">£{priceCalculation.totalGBP} (All-Inclusive)</span>
               </div>
             </div>
 
@@ -438,7 +423,7 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
                           <div className="flex justify-between items-start mb-1">
                             <span className="text-[10px] uppercase font-bold text-[#C5A368] tracking-wider">{vehicle.category}</span>
                             <span className="text-xs font-bold text-white">
-                              {symbol}{Math.round(fare * multiplier)}
+                              £{fare}
                             </span>
                           </div>
 
@@ -596,7 +581,7 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
                           <div className="flex justify-between items-center font-bold mb-1">
                             <span className="text-[#E2E4E9]">{stop.name}</span>
                             <span className="text-[#C5A368] font-mono text-xs">
-                              {stop.extraPrice === 0 ? 'Free' : `+${symbol}${Math.round(stop.extraPrice * multiplier)}`}
+                              {stop.extraPrice === 0 ? 'Free' : `+£${stop.extraPrice}`}
                             </span>
                           </div>
                           <p className="text-[10px] text-[#8A8F98]">{stop.highlight}</p>
@@ -707,11 +692,11 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
                   <span className="text-[10px] font-bold uppercase tracking-widest text-[#C5A368] block mb-1">
                     Live Trip Quote Summary
                   </span>
-                  <h3 className="text-2xl font-bold text-white">
-                    {symbol}{priceCalculation.totalConverted}
+                  <h3 className="text-3xl font-bold text-[#C5A368]">
+                    £{priceCalculation.totalGBP}
                   </h3>
                   <p className="text-xs text-[#8A8F98] mt-1">
-                    GBP Equivalent: <strong className="text-[#E2E4E9]">£{priceCalculation.totalGBP}</strong> • All-inclusive fixed fare
+                    All-inclusive fixed fare • Taxes, tolls &amp; meet &amp; greet included
                   </p>
                 </div>
 
@@ -732,7 +717,7 @@ Estimated Total: £${priceCalculation.totalGBP} (${symbol}${priceCalculation.tot
                   {currentStop.id !== 'none' && (
                     <div className="flex justify-between py-1 border-b border-[#23262D] text-[#C5A368]">
                       <span>Layover:</span>
-                      <span className="font-semibold">{currentStop.name} (+{symbol}{Math.round(currentStop.extraPrice * multiplier)})</span>
+                      <span className="font-semibold">{currentStop.name} (+£{currentStop.extraPrice})</span>
                     </div>
                   )}
                 </div>
