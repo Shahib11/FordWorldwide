@@ -1,5 +1,5 @@
 import React from 'react';
-import { Compass, Landmark, Shield, Clock, ArrowRight, Sparkles } from 'lucide-react';
+import { Compass, Landmark, Shield, Clock, ArrowRight } from 'lucide-react';
 import { SIGHTSEEING_STOPS } from '../data/mockData';
 
 interface SightseeingAddonsProps {
@@ -10,19 +10,19 @@ export const SightseeingAddons: React.FC<SightseeingAddonsProps> = ({ onSelectLa
   const stops = SIGHTSEEING_STOPS.filter(s => s.id !== 'none');
 
   return (
-    <section id="sightseeing" className="py-24 bg-[#0A0B0E] relative border-b border-[#23262D]">
+    <section id="sightseeing" className="py-16 bg-white border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#14161C] border border-[#23262D] text-[#C5A368] text-[10px] font-bold uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold">
             <Compass className="w-3.5 h-3.5" />
-            <span>Turn Your Transfer into a Royal Day Tour</span>
+            <span>Optional Layovers</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#E2E4E9] tracking-tight">
-            En-Route Sightseeing <span className="font-serif italic text-[#C5A368]">Layovers</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">
+            En-Route Sightseeing Layovers
           </h2>
-          <p className="text-[#8A8F98] text-sm leading-relaxed max-w-2xl mx-auto">
-            Since the route between London Heathrow and Southampton Port runs directly past Britain&apos;s most iconic historic landmarks, you can add an effortless 1.5 to 2-hour stopover while your chauffeur securely minds your cruise luggage.
+          <p className="text-slate-600 text-sm leading-relaxed max-w-2xl mx-auto">
+            Add a relaxed stopover to your journey while your chauffeur securely attends to your luggage inside the vehicle.
           </p>
         </div>
 
@@ -32,45 +32,45 @@ export const SightseeingAddons: React.FC<SightseeingAddonsProps> = ({ onSelectLa
             return (
               <div
                 key={stop.id}
-                className="rounded-2xl bg-[#14161C] border border-[#23262D] hover:border-[#C5A368]/60 p-5 flex flex-col justify-between transition-all duration-300 shadow-lg group"
+                className="rounded-xl bg-slate-50 border border-slate-200 hover:border-amber-300 p-5 flex flex-col justify-between transition-all shadow-xs group"
               >
-                <div className="space-y-3.5">
+                <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <div className="p-2 rounded-xl bg-[#1C1F26] text-[#C5A368] border border-[#23262D]">
+                    <div className="p-2 rounded-lg bg-white text-amber-700 border border-slate-200">
                       <Landmark className="w-4 h-4" />
                     </div>
-                    <span className="font-mono text-xs font-bold text-[#C5A368]">
+                    <span className="font-semibold text-xs text-amber-800 bg-amber-50 px-2 py-0.5 rounded border border-amber-200">
                       +£{stop.extraPrice}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-bold text-white group-hover:text-[#C5A368] transition-colors">
+                    <h3 className="text-sm font-bold text-slate-900 group-hover:text-amber-800 transition-colors">
                       {stop.name}
                     </h3>
-                    <div className="flex items-center space-x-1.5 text-[11px] text-[#8A8F98] mt-1">
-                      <Clock className="w-3 h-3 text-[#C5A368]" />
-                      <span>{stop.duration} Stopover Included</span>
+                    <div className="flex items-center space-x-1.5 text-[11px] text-slate-500 mt-1">
+                      <Clock className="w-3 h-3 text-amber-700" />
+                      <span>{stop.duration} Stopover</span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-[#8A8F98] leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {stop.description}
                   </p>
                 </div>
 
-                <div className="pt-4 mt-3.5 border-t border-[#23262D] space-y-2.5">
-                  <div className="flex items-center space-x-1.5 text-[10px] uppercase font-bold text-emerald-400">
+                <div className="pt-3.5 mt-3 border-t border-slate-200/80 space-y-2.5">
+                  <div className="flex items-center space-x-1.5 text-[10px] font-semibold text-emerald-700">
                     <Shield className="w-3 h-3" />
-                    <span>Luggage safe in vehicle</span>
+                    <span>Luggage minded in vehicle</span>
                   </div>
                   <button
                     type="button"
                     onClick={() => onSelectLayover(stop.id)}
-                    className="w-full py-2.5 rounded-xl bg-[#1C1F26] group-hover:bg-[#C5A368] text-[#E2E4E9] group-hover:text-black font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center space-x-1.5 cursor-pointer border border-[#23262D] group-hover:border-[#C5A368]"
+                    className="w-full py-2 rounded-lg bg-white group-hover:bg-slate-900 text-slate-800 group-hover:text-white font-semibold text-xs transition-colors flex items-center justify-center space-x-1 cursor-pointer border border-slate-300 group-hover:border-slate-900"
                   >
-                    <span>Add to Transfer</span>
-                    <ArrowRight className="w-3 h-3" />
+                    <span>Add to Booking</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
                   </button>
                 </div>
               </div>

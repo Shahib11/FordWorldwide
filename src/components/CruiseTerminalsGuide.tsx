@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Anchor, MapPin, Clock, Ship, ShieldCheck, ExternalLink, Sparkles } from 'lucide-react';
+import { Anchor, MapPin, Clock, Ship, ShieldCheck } from 'lucide-react';
 import { CRUISE_TERMINALS } from '../data/mockData';
 
 interface CruiseTerminalsGuideProps {
@@ -10,23 +10,23 @@ export const CruiseTerminalsGuide: React.FC<CruiseTerminalsGuideProps> = ({ onBo
   const [selectedTerminal, setSelectedTerminal] = useState(CRUISE_TERMINALS[0]);
 
   return (
-    <section id="cruise-terminals" className="py-24 bg-[#0A0B0E] relative border-b border-[#23262D]">
+    <section id="cruise-terminals" className="py-16 bg-slate-50 border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <div className="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-[#14161C] border border-[#23262D] text-[#C5A368] text-[10px] font-bold uppercase tracking-wider">
+        <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
+          <div className="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-xs font-semibold">
             <Anchor className="w-3.5 h-3.5" />
-            <span>Southampton Port Authority Terminals</span>
+            <span>Port Navigation</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-[#E2E4E9] tracking-tight">
-            Southampton <span className="font-serif italic text-[#C5A368]">Cruise Terminals Guide</span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">
+            Southampton Cruise Terminals Guide
           </h2>
-          <p className="text-[#8A8F98] text-sm leading-relaxed max-w-2xl mx-auto">
-            FourFold Worldwide provides dedicated chauffeur access to all five active Southampton cruise berths. Direct drop-off at the baggage scanners &amp; seamless disembarkation meet &amp; greet.
+          <p className="text-slate-600 text-sm leading-relaxed max-w-2xl mx-auto">
+            Direct VIP chauffeur drop-off and pickup across all Southampton cruise berths with luggage assistance.
           </p>
         </div>
 
-        {/* Interactive Terminals Grid / Master-Detail */}
+        {/* Terminals Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Left 5 Cols: Terminals List */}
           <div className="lg:col-span-5 space-y-2.5">
@@ -36,25 +36,25 @@ export const CruiseTerminalsGuide: React.FC<CruiseTerminalsGuideProps> = ({ onBo
                 <div
                   key={terminal.id}
                   onClick={() => setSelectedTerminal(terminal)}
-                  className={`p-3.5 rounded-xl border cursor-pointer transition-all duration-200 ${
+                  className={`p-3.5 rounded-lg border cursor-pointer transition-all ${
                     isSelected
-                      ? 'bg-[#1C1F26] border-[#C5A368] ring-1 ring-[#C5A368] shadow-md'
-                      : 'bg-[#14161C] border-[#23262D] hover:border-[#3A3F4D]'
+                      ? 'bg-amber-50/70 border-amber-600 ring-1 ring-amber-600 shadow-xs'
+                      : 'bg-white border-slate-200 hover:border-slate-300'
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-3">
-                      <div className={`p-2 rounded-lg ${
-                        isSelected ? 'bg-[#C5A368] text-black font-bold' : 'bg-[#1C1F26] text-[#C5A368] border border-[#23262D]'
+                      <div className={`p-2 rounded-md ${
+                        isSelected ? 'bg-amber-700 text-white font-bold' : 'bg-slate-100 text-slate-600'
                       }`}>
                         <Anchor className="w-3.5 h-3.5" />
                       </div>
                       <div>
-                        <h4 className="text-xs font-bold text-white">{terminal.name}</h4>
-                        <p className="text-[10px] text-[#8A8F98] line-clamp-1">{terminal.dockNumber}</p>
+                        <h3 className="text-xs font-bold text-slate-900">{terminal.name}</h3>
+                        <p className="text-[11px] text-slate-500 line-clamp-1">{terminal.dockNumber}</p>
                       </div>
                     </div>
-                    <span className="text-[11px] text-[#C5A368] font-bold">Details →</span>
+                    <span className="text-xs text-amber-800 font-semibold">Details →</span>
                   </div>
                 </div>
               );
@@ -62,60 +62,60 @@ export const CruiseTerminalsGuide: React.FC<CruiseTerminalsGuideProps> = ({ onBo
           </div>
 
           {/* Right 7 Cols: Selected Terminal Detailed Card */}
-          <div className="lg:col-span-7 bg-[#14161C] border border-[#23262D] rounded-2xl p-6 shadow-xl flex flex-col justify-between space-y-5">
+          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-6 shadow-sm flex flex-col justify-between space-y-5">
             <div className="space-y-4">
-              <div className="flex items-center justify-between border-b border-[#23262D] pb-3.5">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-3">
                 <div>
-                  <span className="text-[10px] font-bold text-[#C5A368] uppercase tracking-widest block">
-                    Active Cruise Terminal
+                  <span className="text-[10px] font-semibold text-amber-800 uppercase tracking-wider block">
+                    Selected Terminal
                   </span>
-                  <h3 className="text-xl font-bold text-white mt-1">
+                  <h3 className="text-lg font-bold text-slate-900 mt-0.5">
                     {selectedTerminal.name}
                   </h3>
                 </div>
-                <div className="p-2.5 bg-[#1C1F26] border border-[#23262D] rounded-xl text-[#C5A368]">
+                <div className="p-2.5 bg-slate-50 border border-slate-200 rounded-lg text-amber-700">
                   <Ship className="w-5 h-5" />
                 </div>
               </div>
 
-              {/* Terminal Address & Location */}
-              <div className="flex items-start space-x-2.5 text-xs text-[#E2E4E9]">
-                <MapPin className="w-4 h-4 text-[#C5A368] shrink-0 mt-0.5" />
+              {/* Terminal Address */}
+              <div className="flex items-start space-x-2 text-xs text-slate-700">
+                <MapPin className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-[#8A8F98] block text-[10px] uppercase font-bold">Port Access Location:</span>
-                  <span className="font-semibold text-white">{selectedTerminal.dockNumber}</span>
+                  <span className="text-slate-400 block text-[10px] uppercase font-bold">Port Address:</span>
+                  <span className="font-semibold text-slate-900">{selectedTerminal.dockNumber}</span>
                 </div>
               </div>
 
               {/* Transit Times */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                <div className="p-3 rounded-xl bg-[#1C1F26] border border-[#23262D]">
-                  <div className="flex items-center space-x-2 text-[#8A8F98] text-xs mb-1">
-                    <Clock className="w-3.5 h-3.5 text-[#C5A368]" />
-                    <span className="text-[10px] uppercase font-bold">From London Heathrow (LHR)</span>
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <div className="flex items-center space-x-1.5 text-slate-500 text-xs mb-1">
+                    <Clock className="w-3.5 h-3.5 text-amber-700" />
+                    <span className="text-[10px] uppercase font-bold">From Heathrow (LHR)</span>
                   </div>
-                  <p className="text-xs font-bold text-white">{selectedTerminal.transitTimeFromLHR}</p>
+                  <p className="text-xs font-bold text-slate-900">{selectedTerminal.transitTimeFromLHR}</p>
                 </div>
 
-                <div className="p-3 rounded-xl bg-[#1C1F26] border border-[#23262D]">
-                  <div className="flex items-center space-x-2 text-[#8A8F98] text-xs mb-1">
-                    <Clock className="w-3.5 h-3.5 text-[#C5A368]" />
+                <div className="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                  <div className="flex items-center space-x-2 text-slate-500 text-xs mb-1">
+                    <Clock className="w-3.5 h-3.5 text-amber-700" />
                     <span className="text-[10px] uppercase font-bold">From Central London</span>
                   </div>
-                  <p className="text-xs font-bold text-white">{selectedTerminal.transitTimeFromLondon}</p>
+                  <p className="text-xs font-bold text-slate-900">{selectedTerminal.transitTimeFromLondon}</p>
                 </div>
               </div>
 
-              {/* Popular Cruise Ships & Lines */}
-              <div className="space-y-2 pt-1">
-                <span className="text-[10px] font-bold text-[#8A8F98] uppercase tracking-wider block">
-                  Common Cruise Lines at this Terminal:
+              {/* Popular Cruise Lines */}
+              <div className="space-y-1.5 pt-1">
+                <span className="text-xs font-semibold text-slate-700 block">
+                  Common Cruise Lines:
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {selectedTerminal.popularCruiseLines.map((line, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-lg bg-[#1C1F26] border border-[#23262D] text-[11px] text-[#C5A368] font-medium"
+                      className="px-2.5 py-1 rounded-md bg-slate-100 text-slate-700 text-xs font-medium"
                     >
                       {line}
                     </span>
@@ -124,26 +124,26 @@ export const CruiseTerminalsGuide: React.FC<CruiseTerminalsGuideProps> = ({ onBo
               </div>
 
               {/* Meet & Greet Procedure */}
-              <div className="p-3.5 rounded-xl bg-[#1C1F26] border border-[#23262D] text-xs text-[#E2E4E9] flex items-start space-x-3">
-                <ShieldCheck className="w-4 h-4 text-[#C5A368] shrink-0 mt-0.5" />
+              <div className="p-3.5 rounded-lg bg-amber-50/60 border border-amber-200 text-xs flex items-start space-x-2.5">
+                <ShieldCheck className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
                 <div>
-                  <strong className="text-white block mb-0.5 text-xs">FourFold Chauffeur Protocol:</strong>
-                  <span className="text-[#8A8F98] text-[11px] leading-relaxed">{selectedTerminal.meetPointDescription}</span>
+                  <strong className="text-slate-900 block mb-0.5">Meet &amp; Greet Service:</strong>
+                  <span className="text-slate-600 text-xs">{selectedTerminal.meetPointDescription}</span>
                 </div>
               </div>
             </div>
 
             {/* Quick CTA */}
-            <div className="pt-3.5 border-t border-[#23262D] flex items-center justify-between">
-              <span className="text-xs text-[#8A8F98]">
-                Traveling to or from {selectedTerminal.name.split('(')[0]}?
+            <div className="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <span className="text-xs text-slate-500">
+                Travelling via {selectedTerminal.name.split('(')[0]}?
               </span>
               <button
                 type="button"
                 onClick={() => onBookTerminal(selectedTerminal.id)}
-                className="px-4 py-2.5 rounded-xl bg-[#C5A368] hover:bg-[#b59458] text-black font-bold uppercase tracking-wider text-xs shadow-md transition-all cursor-pointer"
+                className="px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs transition-colors cursor-pointer"
               >
-                Book This Terminal →
+                Book Transfer to This Terminal →
               </button>
             </div>
           </div>

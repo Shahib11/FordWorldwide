@@ -293,10 +293,10 @@ export const FAQS = [
 export const COMPANY_INFO = {
   name: 'FourFold Worldwide',
   tagline: 'VIP Private Chauffeur & Cruise Transfer Specialists',
-  phone: '+44 20 8123 4890',
-  whatsapp: '+447400123456',
-  email: 'bookings@fourfoldworldwide.com',
-  address: 'Mayfair, London & Western Docks, Southampton, United Kingdom',
-  operatingHours: '24 Hours / 7 Days a Week (Dispatch & Transfers)',
+  phone: '+44 7572 912618',
+  whatsapp: '+447572912618',
+  email: 'Bookings@fourfoldworldwide.com',
+  address: 'London & Southampton Port, United Kingdom',
+  operatingHours: '24 Hours / 7 Days a Week',
   license: 'Licensed by Transport for London (TfL PCO) & Southampton City Council',
 };
