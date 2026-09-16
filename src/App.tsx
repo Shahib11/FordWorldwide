@@ -7,18 +7,24 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { TermsAndConditions } from './components/TermsAndConditions';
 import { PrivacyPolicy } from './components/PrivacyPolicy';
+import { ReviewPage } from './components/ReviewPage';
 import { VehicleType } from './types';
 import { MessageCircle } from 'lucide-react';
 import { COMPANY_INFO } from './data/mockData';
 
 export default function App() {
   const [selectedVehicle, setSelectedVehicle] = useState<VehicleType>('v-class');
-  const [currentView, setCurrentView] = useState<'home' | 'terms' | 'privacy'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'terms' | 'privacy' | 'review'>('home');
 
   useEffect(() => {
-    const handleHashChange = () => {
+    const handleLocationChange = () => {
       const hash = window.location.hash.toLowerCase();
-      if (hash === '#terms' || hash === '#terms-and-conditions') {
+      const path = window.location.pathname.toLowerCase();
+
+      if (hash === '#review' || hash === '#reviews' || path === '/review' || path === '/reviews') {
+        setCurrentView('review');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (hash === '#terms' || hash === '#terms-and-conditions') {
         setCurrentView('terms');
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else if (hash === '#privacy' || hash === '#privacy-policy' || hash === '#gdpr') {
@@ -29,19 +35,26 @@ export default function App() {
       }
     };
 
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleLocationChange();
+    window.addEventListener('hashchange', handleLocationChange);
+    window.addEventListener('popstate', handleLocationChange);
+    return () => {
+      window.removeEventListener('hashchange', handleLocationChange);
+      window.removeEventListener('popstate', handleLocationChange);
+    };
   }, []);
 
-  const navigateTo = (view: 'home' | 'terms' | 'privacy') => {
+  const navigateTo = (view: 'home' | 'terms' | 'privacy' | 'review') => {
     setCurrentView(view);
-    if (view === 'terms') {
+    if (view === 'review') {
+      window.location.hash = 'review';
+    } else if (view === 'terms') {
       window.location.hash = 'terms';
     } else if (view === 'privacy') {
       window.location.hash = 'privacy';
     } else {
-      window.history.pushState(null, '', window.location.pathname);
+      window.history.pushState(null, '', window.location.pathname.replace(/\/review.*$/, ''));
+      window.location.hash = '';
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -71,6 +84,11 @@ export default function App() {
   const whatsappFloatingUrl = `https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}?text=${encodeURIComponent(
     'Hello FourFold Worldwide, I would like to check availability for a London to Southampton Cruise Port transfer.'
   )}`;
+
+  // If viewing the mobile-first review page (QR code / email link), render standalone with zero distractions
+  if (currentView === 'review') {
+    return <ReviewPage onBackToHome={() => navigateTo('home')} />;
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 selection:bg-amber-100 selection:text-amber-900 flex flex-col justify-between">
@@ -109,6 +127,7 @@ export default function App() {
       <Footer 
         onOpenTerms={() => navigateTo('terms')}
         onOpenPrivacy={() => navigateTo('privacy')}
+        onOpenReview={() => navigateTo('review')}
       />
 
       {/* Floating WhatsApp Direct Contact */}

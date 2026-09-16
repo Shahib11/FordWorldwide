@@ -5,9 +5,10 @@ import { COMPANY_INFO } from '../data/mockData';
 interface FooterProps {
   onOpenTerms?: () => void;
   onOpenPrivacy?: () => void;
+  onOpenReview?: () => void;
 }
 
-export const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenPrivacy }) => {
+export const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenPrivacy, onOpenReview }) => {
   const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp.replace('+', '')}?text=${encodeURIComponent(
     'Hello FourFold Worldwide, I would like to book a Southampton transfer.'
   )}`;
@@ -58,6 +59,14 @@ export const Footer: React.FC<FooterProps> = ({ onOpenTerms, onOpenPrivacy }) =>
         {/* Legal links & Copyright */}
         <div className="flex flex-col sm:items-end gap-1.5 text-[11px] text-slate-500">
           <div className="flex items-center space-x-3">
+            <button
+              type="button"
+              onClick={onOpenReview}
+              className="text-amber-700 hover:text-amber-800 font-semibold transition-colors cursor-pointer"
+            >
+              ★ Leave a Review
+            </button>
+            <span>•</span>
             <button
               type="button"
               onClick={onOpenTerms}
